@@ -1,0 +1,138 @@
+/* --- Header Section --- */
+.header {
+  height: 10vh;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+}
+
+.blackBackground {
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+/* Logo Section */
+.logo {
+  padding: 0px 20px;
+  width: 20%;
+}
+
+.logoImage {
+  height: 100%;
+}
+
+.logoLink {
+  text-decoration: none !important;
+}
+
+.logoText {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+/* --- Search Bar Section --- */
+.searchBarContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  height: 70px;
+  margin: auto 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+}
+
+.searchBarList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  color: white;
+  height: 70px;
+  width: 100%;
+  margin: 0;
+}
+
+.searchBarItem {
+  border-radius: 50px;
+  height: 50px;
+  margin: auto 0;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.searchBarItem:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Search Icon and Input */
+.searchBarIconContainer {
+  height: 70px;
+  width: 70px;
+  background-color: #ff4b1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+}
+
+.searchBarExpanded {
+  transition: all 0.5s ease-out;
+  width: 100%;
+  height: 70px;
+  background-color: #ff4b1a;
+  border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.searchInput {
+  width: 85%;
+  height: 70px;
+  background-color: #ff4b1a;
+  color: white !important;
+  border-radius: 50px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.searchInput::placeholder {
+  color: white !important;
+  font-size: 1rem;
+}
+
+/* Close Search Bar Button */
+.searchBarCloseButton {
+  position: absolute;
+  right: -50px;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* --- User Actions Section --- */
+.userActions {
+  padding: 0px 20px;
+  width: 20%;
+}
+
+.paddingNone {
+  padding: 0;
+}
+
+.justifyContentEnd {
+  justify-content: flex-end;
+}
