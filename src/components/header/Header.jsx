@@ -50,16 +50,20 @@ export default function Header() {
           {!isSearchBarOpen && (
             <>
               <li className={styles.searchBarItem}>
-                <i className="fa-solid fa-desktop me-1"></i> PC
+                <i className="fa-solid fa-desktop me-1"></i>
+                <p>PC</p>
               </li>
               <li className={styles.searchBarItem}>
-                <i className="fa-brands fa-playstation me-1"></i> PlayStation
+                <i className="fa-brands fa-playstation me-1"></i>
+                <p>Playstation</p>
               </li>
               <li className={styles.searchBarItem}>
-                <i className="fa-brands fa-xbox me-1"></i> Xbox
+                <i className="fa-brands fa-xbox me-1"></i>
+                <p>Xbox</p>
               </li>
               <li className={styles.searchBarItem}>
-                <i className="fa-brands fa-yahoo me-1"></i> Nintendo
+                <i className="fa-brands fa-yahoo me-1"></i>
+                <p>Nintendo</p>
               </li>
             </>
           )}

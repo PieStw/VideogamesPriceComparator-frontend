@@ -12,10 +12,17 @@
   backdrop-filter: blur(10px);
 }
 
+@media screen and (max-width: 1200px) {
+  .blackBackground {
+    background-color: none;
+    backdrop-filter: none;
+  }
+}
+
 /* Logo Section */
 .logo {
   padding: 0px 20px;
-  width: 20%;
+  width: 25%;
 }
 
 .logoImage {
@@ -24,13 +31,21 @@
 
 .logoLink {
   text-decoration: none !important;
+  height: 100%;
+  width: 100%;
 }
 
 .logoText {
   color: white;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   margin-left: 1rem;
+}
+
+@media screen and (max-width: 1200px) {
+  .logoText {
+    display: none;
+  }
 }
 
 /* --- Search Bar Section --- */
@@ -38,12 +53,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 50%;
   height: 70px;
   margin: auto 0;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border-radius: 50px;
 }
 
 .searchBarList {
@@ -53,8 +65,11 @@
   list-style: none;
   color: white;
   height: 70px;
-  width: 100%;
+  width: 80%;
   margin: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
 }
 
 .searchBarItem {
@@ -68,8 +83,35 @@
   cursor: pointer;
 }
 
+.searchBarItem > p {
+  margin-bottom: 0;
+}
+
 .searchBarItem:hover {
   background-color: rgba(255, 255, 255, 0.2);
+}
+
+@media screen and (max-width: 1400px) {
+  .searchBarItem > p {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .searchBarItem {
+    display: none;
+  }
+
+  .searchBarList {
+    background: none;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .searchBarContainer {
+    width: 75%;
+  }
 }
 
 /* Search Icon and Input */
@@ -126,7 +168,7 @@
 /* --- User Actions Section --- */
 .userActions {
   padding: 0px 20px;
-  width: 20%;
+  width: 25%;
 }
 
 .paddingNone {
