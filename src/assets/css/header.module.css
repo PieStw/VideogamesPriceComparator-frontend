@@ -1,10 +1,9 @@
 /* --- Header Section --- */
 .header {
-  height: 10vh;
+  height: 100px;
   width: 100%;
-  display: flex;
-  justify-content: space-between;
   position: fixed;
+  z-index: 1;
 }
 
 .blackBackground {
@@ -12,10 +11,19 @@
   backdrop-filter: blur(10px);
 }
 
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
 @media screen and (max-width: 1200px) {
   .blackBackground {
     background-color: none;
     backdrop-filter: none;
+  }
+  .headerContainer {
+    background-color: rgba(0, 0, 0, 1);
+    height: 70px;
   }
 }
 
@@ -26,11 +34,14 @@
 }
 
 .logoImage {
-  height: 100%;
+  height: 100px;
 }
 
 .logoLink {
   text-decoration: none !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100%;
   width: 100%;
 }
@@ -45,6 +56,10 @@
 @media screen and (max-width: 1200px) {
   .logoText {
     display: none;
+  }
+
+  .logoImage {
+    height: 75px;
   }
 }
 
@@ -105,6 +120,8 @@
   .searchBarList {
     background: none;
     justify-content: center;
+    backdrop-filter: none;
+    padding: 0;
   }
 }
 
@@ -153,6 +170,18 @@
   font-size: 1rem;
 }
 
+@media screen and (max-width: 1200px) {
+  .searchBarIconContainer {
+    height: 50px;
+    width: 50px;
+  }
+
+  .searchBarExpanded,
+  .searchInput {
+    height: 45px;
+  }
+}
+
 /* Close Search Bar Button */
 .searchBarCloseButton {
   position: absolute;
@@ -177,4 +206,36 @@
 
 .justifyContentEnd {
   justify-content: flex-end;
+}
+
+/* Hidden Menu */
+
+.hiddenMenu {
+  height: 30px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  display: none;
+}
+
+.searchBarItemHidden {
+  margin: auto 0;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.searchBarItemHidden > * {
+  margin-bottom: 0;
+  color: white;
+}
+
+@media screen and (max-width: 1200px) {
+  .hiddenMenu {
+    display: flex;
+  }
 }

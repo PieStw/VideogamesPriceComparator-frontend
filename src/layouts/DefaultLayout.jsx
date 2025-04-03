@@ -8,9 +8,7 @@ export default function DefaultLayout() {
       <div className="wrapper">
         <Header></Header>
 
-        <main>
-          <Outlet></Outlet>
-        </main>
+        <Outlet></Outlet>
 
         <Footer></Footer>
       </div>

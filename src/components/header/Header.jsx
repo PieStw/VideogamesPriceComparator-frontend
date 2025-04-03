@@ -29,75 +29,98 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`${styles.header} ${backgroundColor}`}>
-      {/* Logo Section */}
-      <div className={styles.logo}>
-        <NavLink to="/" className={styles.logoLink}>
-          <img src={logo} alt="Logo" className={styles.logoImage} />
-          <span className={styles.logoText}>Price Comparator</span>
-        </NavLink>
-      </div>
+    <>
+      <header className={`${styles.header} ${backgroundColor}`}>
+        <div className={styles.headerContainer}>
+          {/* Logo Section */}
+          <div className={styles.logo}>
+            <NavLink to="/" className={styles.logoLink}>
+              <img src={logo} alt="Logo" className={styles.logoImage} />
+              <span className={styles.logoText}>Price Comparator</span>
+            </NavLink>
+          </div>
 
-      {/* Search Bar Section */}
-      <div className={styles.searchBarContainer}>
-        <ul
-          className={`${styles.searchBarList} ${
-            isSearchBarOpen
-              ? `${styles.paddingNone} ${styles.justifyContentEnd}`
-              : ""
-          }`}
-        >
-          {!isSearchBarOpen && (
-            <>
-              <li className={styles.searchBarItem}>
-                <i className="fa-solid fa-desktop me-1"></i>
-                <p>PC</p>
-              </li>
-              <li className={styles.searchBarItem}>
-                <i className="fa-brands fa-playstation me-1"></i>
-                <p>Playstation</p>
-              </li>
-              <li className={styles.searchBarItem}>
-                <i className="fa-brands fa-xbox me-1"></i>
-                <p>Xbox</p>
-              </li>
-              <li className={styles.searchBarItem}>
-                <i className="fa-brands fa-yahoo me-1"></i>
-                <p>Nintendo</p>
-              </li>
-            </>
-          )}
+          {/* Search Bar Section */}
+          <div className={styles.searchBarContainer}>
+            <ul
+              className={`${styles.searchBarList} ${
+                isSearchBarOpen
+                  ? `${styles.paddingNone} ${styles.justifyContentEnd}`
+                  : ""
+              }`}
+            >
+              {!isSearchBarOpen && (
+                <>
+                  <li className={styles.searchBarItem}>
+                    <i className="fa-solid fa-desktop me-1"></i>
+                    <p>PC</p>
+                  </li>
+                  <li className={styles.searchBarItem}>
+                    <i className="fa-brands fa-playstation me-1"></i>
+                    <p>Playstation</p>
+                  </li>
+                  <li className={styles.searchBarItem}>
+                    <i className="fa-brands fa-xbox me-1"></i>
+                    <p>Xbox</p>
+                  </li>
+                  <li className={styles.searchBarItem}>
+                    <i className="fa-brands fa-yahoo me-1"></i>
+                    <p>Nintendo</p>
+                  </li>
+                </>
+              )}
 
-          <li
-            onClick={() => setIsSearchBarOpen(true)}
-            className={
-              isSearchBarOpen
-                ? styles.searchBarExpanded
-                : styles.searchBarIconContainer
-            }
-          >
-            {isSearchBarOpen && (
-              <input
-                type="text"
-                className={styles.searchInput}
-                placeholder="Cerca un gioco..."
-              />
-            )}
-            <i className="fa-solid fa-magnifying-glass"></i>
-            {isSearchBarOpen && (
-              <div
-                className={styles.searchBarCloseButton}
-                onClick={handleCloseSearchBar}
+              <li
+                onClick={() => setIsSearchBarOpen(true)}
+                className={
+                  isSearchBarOpen
+                    ? styles.searchBarExpanded
+                    : styles.searchBarIconContainer
+                }
               >
-                <i className="fa-solid fa-xmark"></i>
-              </div>
-            )}
-          </li>
-        </ul>
-      </div>
+                {isSearchBarOpen && (
+                  <input
+                    type="text"
+                    className={styles.searchInput}
+                    placeholder="Cerca un gioco..."
+                  />
+                )}
+                <i className="fa-solid fa-magnifying-glass"></i>
+                {isSearchBarOpen && (
+                  <div
+                    className={styles.searchBarCloseButton}
+                    onClick={handleCloseSearchBar}
+                  >
+                    <i className="fa-solid fa-xmark"></i>
+                  </div>
+                )}
+              </li>
+            </ul>
+          </div>
 
-      {/* User Actions Section */}
-      <div className={styles.userActions}></div>
-    </header>
+          {/* User Actions Section */}
+          <div className={styles.userActions}></div>
+        </div>
+
+        <div className={styles.hiddenMenu}>
+          <li className={styles.searchBarItemHidden}>
+            <i className="fa-solid fa-desktop me-1"></i>
+            <p>PC</p>
+          </li>
+          <li className={styles.searchBarItemHidden}>
+            <i className="fa-brands fa-playstation me-1"></i>
+            <p>Playstation</p>
+          </li>
+          <li className={styles.searchBarItemHidden}>
+            <i className="fa-brands fa-xbox me-1"></i>
+            <p>Xbox</p>
+          </li>
+          <li className={styles.searchBarItemHidden}>
+            <i className="fa-brands fa-yahoo me-1"></i>
+            <p>Nintendo</p>
+          </li>
+        </div>
+      </header>
+    </>
   );
 }
