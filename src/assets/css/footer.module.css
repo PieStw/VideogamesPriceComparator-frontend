@@ -1,0 +1,88 @@
+.container {
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 1400px;
+  max-width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.mailList {
+  background-color: #323232;
+  padding: 20px;
+}
+
+.endPage {
+  height: 20vh;
+  background-color: #101010;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.socialMedia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  padding: 0;
+}
+
+form {
+  width: 100%;
+  max-width: 900px;
+}
+
+.inputName,
+.inputLastName,
+.inputEmail,
+.button {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.inputName,
+.inputLastName,
+.inputEmail {
+  background-color: #f7f7f7;
+}
+
+.button {
+  background-color: #ff4b1a;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff4b1a;
+}
+
+@media (max-width: 768px) {
+  .mailList {
+    height: auto;
+    padding: 10px;
+  }
+
+  .inputName,
+  .inputLastName,
+  .inputEmail,
+  button {
+    width: 100%;
+  }
+
+  .container h2,
+  .container h6 {
+    text-align: center;
+  }
+}

@@ -39,7 +39,7 @@ export default function HomePage() {
               {tranding
                 .filter((_, index) => index !== 4)
                 .map((game) => (
-                  <div key={game.id} className="col-12 col-sm-6 col-md-4">
+                  <div key={game.id} className="col-12 col-md-4">
                     <Card game={game} />
                   </div>
                 ))}
