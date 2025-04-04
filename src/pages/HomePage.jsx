@@ -3,16 +3,16 @@ import styles from "../assets/css/homePage.module.css";
 import { useGamesContext } from "../context/GamesContext";
 import Card from "../components/cards/GameCard";
 import GenreCard from "../components/cards/GenreCard";
+import bg from "../assets/img/bg.jpg";
+import bgIcon from "../assets/img/bg-icon.jpg";
 
 export default function HomePage() {
   const { tranding, genres } = useGamesContext();
-  console.log(tranding);
 
   if (tranding.length === 0) {
     return <div>Caricamento in corso...</div>;
   }
 
-  // Lista dei generi che vogliamo visualizzare
   const desiredGenres = [
     "Action",
     "Adventure",
@@ -25,7 +25,6 @@ export default function HomePage() {
     "Sports",
   ];
 
-  // Filtra i generi per includere solo quelli della lista desiderata
   const filteredGenres = genres.filter((genre) =>
     desiredGenres.includes(genre.name)
   );
@@ -51,6 +50,7 @@ export default function HomePage() {
           </div>
           <div className={styles.cut}></div>
         </div>
+
         <div className={styles.container}>
           <h2 className={styles.title}>Trending</h2>
           <div className={styles.cardContainer}>
@@ -65,6 +65,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
+
         <div
           className={styles.jumboContainer}
           style={{
@@ -83,6 +84,7 @@ export default function HomePage() {
           </div>
           <div className={styles.cut}></div>
         </div>
+
         <div className={styles.container}>
           <h2 className={styles.title}>Popular Genres</h2>
           <div className={styles.cardContainer}>
@@ -92,6 +94,41 @@ export default function HomePage() {
                   <GenreCard genre={genre} />
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+
+        <div
+          className={styles.bannerContainer}
+          style={{
+            backgroundImage: `url(${bg})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="container py-5">
+            <div className="row justify-content-center align-items-center text-center">
+              <div className="col-12 col-md-3 d-flex justify-content-center">
+                <img
+                  src={bgIcon}
+                  alt="Background Icon"
+                  className={styles.bgIcon}
+                />
+              </div>
+              <div className="col-12 col-md-6">
+                <h1>Discover Your Next Adventure</h1>
+              </div>
+              <div className="col-12 mt-4">
+                <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                  {tranding
+                    .filter((_, index) => index > 9 && index < 14)
+                    .map((game) => (
+                      <div key={game.id} className="col">
+                        <Card game={game} />
+                      </div>
+                    ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
