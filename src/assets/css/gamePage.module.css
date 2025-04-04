@@ -1,0 +1,35 @@
+.jumboContainer {
+  width: 100%;
+
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.infoContainer {
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 1400px;
+  max-width: 100%;
+  display: flex;
+  align-items: center;
+  height: 70vh;
+}
+.info {
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.cut {
+  height: 30vh;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #323232;
+  clip-path: polygon(0 50%, 100% 100%, 100% 100%, 0 100%);
+}

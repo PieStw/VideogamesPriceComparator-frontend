@@ -12,13 +12,14 @@ export default function Footer() {
           </h6>
           <form className="row mt-3">
             <input
-              className={`${styles.inputName} col-12 col-md-6 mt-3 `}
+              className={`${styles.inputName} col-12 mt-3`}
               type="text"
               placeholder="Enter your name"
               required
             />
+
             <input
-              className={`${styles.inputLastName} col-12 col-md-6 mt-3 `}
+              className={`${styles.inputLastName} col-12 mt-3 `}
               type="text"
               placeholder="Enter your last name"
               required

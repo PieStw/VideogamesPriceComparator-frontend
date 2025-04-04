@@ -7,12 +7,22 @@ export const useGamesContext = () => useContext(GamesContext);
 export const GamesProvider = ({ children }) => {
   const [tranding, setTranding] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [game, setGame] = useState([]);
 
   function getTranding() {
     fetch("http://127.0.0.1:8000/api/videogames/bestseller")
       .then((response) => response.json())
       .then((data) => {
         setTranding(data.data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }
+
+  function getGame(id) {
+    fetch(`http://127.0.0.1:8000/api/videogames/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setGame(data.data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }
@@ -32,7 +42,7 @@ export const GamesProvider = ({ children }) => {
   }, []);
 
   return (
-    <GamesContext.Provider value={{ tranding, genres }}>
+    <GamesContext.Provider value={{ tranding, genres, game, getGame }}>
       {children}
     </GamesContext.Provider>
   );
