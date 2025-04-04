@@ -121,7 +121,9 @@ export default function HomePage() {
               <div className="col-12 mt-4">
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                   {tranding
-                    .filter((_, index) => index > 9 && index < 14)
+                    .filter(
+                      (_, index) => index > 9 && index < 15 && index !== 13
+                    )
                     .map((game) => (
                       <div key={game.id} className="col">
                         <Card game={game} />
