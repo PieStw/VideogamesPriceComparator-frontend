@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import styles from "../assets/css/gamePage.module.css";
 import { useGamesContext } from "../context/GamesContext";
 import { useEffect } from "react";
+import Jumbo from "../components/jumbo/jumbo";
 
 export default function GamePage() {
   const { id } = useParams();
@@ -18,19 +19,7 @@ export default function GamePage() {
 
   return (
     <>
-      <div
-        className={styles.jumboContainer}
-        style={{
-          backgroundImage: `url(${game.image_url})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center 30%",
-        }}
-      >
-        <div className={styles.infoContainer}>
-          <div className={styles.info}></div>
-        </div>
-        <div className={styles.cut}></div>
-      </div>
+      <Jumbo game={game} info={false} />
     </>
   );
 }

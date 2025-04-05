@@ -5,6 +5,7 @@ import Card from "../components/cards/GameCard";
 import GenreCard from "../components/cards/GenreCard";
 import bg from "../assets/img/bg.jpg";
 import bgIcon from "../assets/img/bg-icon.jpg";
+import Jumbo from "../components/jumbo/jumbo";
 
 export default function HomePage() {
   const { tranding, genres } = useGamesContext();
@@ -32,24 +33,7 @@ export default function HomePage() {
   return (
     <>
       <main className={styles.main}>
-        <div
-          className={styles.jumboContainer}
-          style={{
-            backgroundImage: `url(${tranding[4].image_url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center 30%",
-          }}
-        >
-          <div className={styles.infoContainer}>
-            <div className={styles.info}>
-              <h1 className={styles.jumboTitle}>{tranding[4].title}</h1>
-              <h2 className={styles.jumboRating}>
-                Rating: {tranding[4].rating}
-              </h2>
-            </div>
-          </div>
-          <div className={styles.cut}></div>
-        </div>
+        <Jumbo game={tranding[4]} info={true} />
 
         <div className={styles.container}>
           <h2 className={styles.title}>Trending</h2>
@@ -66,24 +50,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div
-          className={styles.jumboContainer}
-          style={{
-            backgroundImage: `url(${tranding[13].image_url})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center 30%",
-          }}
-        >
-          <div className={styles.infoContainer}>
-            <div className={styles.info}>
-              <h1 className={styles.jumboTitle}>{tranding[13].title}</h1>
-              <h2 className={styles.jumboRating}>
-                Rating: {tranding[13].rating}
-              </h2>
-            </div>
-          </div>
-          <div className={styles.cut}></div>
-        </div>
+        <Jumbo game={tranding[13]} info={true} />
 
         <div className={styles.container}>
           <h2 className={styles.title}>Popular Genres</h2>
