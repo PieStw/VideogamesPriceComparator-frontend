@@ -1,15 +1,29 @@
 import React, { useState, useEffect } from "react";
 import styles from "../../assets/css/header.module.css";
 import logo from "../../assets/img/logo.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useLocation } from "react-router-dom";
+import { useGamesContext } from "../../context/GamesContext";
 
 export default function Header() {
   const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
   const [backgroundColor, setBackgroundColor] = useState("");
+  const [game, setGame] = useState("");
+
+  const { setSearch } = useGamesContext();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const handleCloseSearchBar = (e) => {
     e.stopPropagation();
     setIsSearchBarOpen(false);
+  };
+
+  const searchGame = (e) => {
+    e.preventDefault();
+    setSearch(game);
+    if (location.pathname !== "/search") {
+      navigate("/search");
+    }
   };
 
   useEffect(() => {
@@ -22,10 +36,7 @@ export default function Header() {
     };
 
     window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -83,9 +94,25 @@ export default function Header() {
                     type="text"
                     className={styles.searchInput}
                     placeholder="Cerca un gioco..."
+                    onChange={(e) => setGame(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        searchGame(e);
+                      }
+                    }}
                   />
                 )}
-                <i className="fa-solid fa-magnifying-glass"></i>
+
+                {!isSearchBarOpen ? (
+                  <i className="fa-solid fa-magnifying-glass"></i>
+                ) : (
+                  <i
+                    className="fa-solid fa-arrow-right"
+                    onClick={searchGame}
+                    style={{ cursor: "pointer" }}
+                  ></i>
+                )}
+
                 {isSearchBarOpen && (
                   <div
                     className={styles.searchBarCloseButton}
@@ -102,6 +129,7 @@ export default function Header() {
           <div className={styles.userActions}></div>
         </div>
 
+        {/* Hidden Menu (for mobile or responsiveness) */}
         <div className={styles.hiddenMenu}>
           <li className={styles.searchBarItemHidden}>
             <i className="fa-solid fa-desktop me-1"></i>
