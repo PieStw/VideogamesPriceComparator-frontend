@@ -7,11 +7,19 @@ export const useGamesContext = () => useContext(GamesContext);
 export const GamesProvider = ({ children }) => {
   const [tranding, setTranding] = useState([]);
   const [genres, setGenres] = useState([]);
+  const [platforms, setPlatforms] = useState([]);
   const [game, setGame] = useState([]);
   const [price, setPrice] = useState([]);
   const [stores, setStores] = useState([]);
   const [search, setSearch] = useState("");
   const [games, setGames] = useState([]);
+
+  const [pagination, setPagination] = useState({
+    total: 0,
+    per_page: 0,
+    current_page: 1,
+    last_page: 1,
+  });
 
   function getTranding() {
     fetch("http://127.0.0.1:8000/api/videogames/bestseller")
@@ -41,6 +49,15 @@ export const GamesProvider = ({ children }) => {
       .catch((error) => console.error("Error fetching data:", error));
   }
 
+  function getPlatforms() {
+    fetch("http://127.0.0.1:8000/api/platforms")
+      .then((response) => response.json())
+      .then((data) => {
+        setPlatforms(data.data);
+      })
+      .catch((error) => console.error("Error fetching data:", error));
+  }
+
   function getGamePriceByName(name) {
     fetch(`https://www.cheapshark.com/api/1.0/games?title=${name}`)
       .then((response) => response.json())
@@ -64,12 +81,16 @@ export const GamesProvider = ({ children }) => {
       .catch((error) => console.error("Error fetching data:", error));
   }
 
-  function getGames() {
-    fetch(`http://127.0.0.1:8000/api/videogames?name=${search}`)
+  function getGames(page, filters) {
+    fetch(
+      `http://127.0.0.1:8000/api/videogames?name=${search}&page=${page}&platform=${
+        filters?.platform || ""
+      }&genre=${filters?.genre || ""}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setGames(data.data);
-        console.log(data.data);
+        setPagination(data.pagination); // Imposta i dati di paginazione
       })
       .catch((error) => console.error("Error fetching data:", error));
   }
@@ -78,6 +99,7 @@ export const GamesProvider = ({ children }) => {
     getTranding();
     getGenres();
     getStore();
+    getPlatforms();
   }, []);
 
   return (
@@ -93,6 +115,8 @@ export const GamesProvider = ({ children }) => {
         setSearch,
         getGames,
         games,
+        platforms,
+        pagination,
       }}
     >
       {children}
