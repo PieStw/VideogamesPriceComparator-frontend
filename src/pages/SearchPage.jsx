@@ -4,24 +4,31 @@ import styles from "../assets/css/searchPage.module.css";
 import GameCard from "../components/cards/GameCard";
 
 export default function SearchPage() {
-  const { games, getGames, search, pagination, genres, platforms } =
-    useGamesContext();
+  const {
+    games,
+    getGames,
+    pagination,
+    genres,
+    platforms,
+    setFilters,
+    filters,
+  } = useGamesContext();
   const [currentPage, setCurrentPage] = useState(1);
-  const [platformFilter, setPlatformFilter] = useState(""); // Stato per il filtro piattaforma
-  const [genreFilter, setGenreFilter] = useState(""); // Stato per il filtro genere
+  const [platformFilter, setPlatformFilter] = useState("");
+  const [genreFilter, setGenreFilter] = useState("");
 
-  // Esegui la ricerca e i filtri quando cambia la pagina, la ricerca, i filtri
   useEffect(() => {
-    getGames(currentPage, {
-      platform: platformFilter,
-      genre: genreFilter,
-    });
-  }, [currentPage, platformFilter, genreFilter, search]);
+    getGames(currentPage, filters);
+  }, [currentPage, platformFilter, genreFilter]);
 
   useEffect(() => {
     setCurrentPage(1);
-    getGames(1, { platform: platformFilter, genre: genreFilter });
-  }, [search]);
+    getGames(1, filters);
+  }, [filters]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, []);
 
   const handleNextPage = () => {
     if (currentPage < pagination.last_page) {
@@ -36,11 +43,19 @@ export default function SearchPage() {
   };
 
   const handlePlatformChange = (event) => {
-    setPlatformFilter(event.target.value); // Aggiorna il filtro della piattaforma
+    setPlatformFilter(event.target.value);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      platform: event.target.value,
+    }));
   };
 
   const handleGenreChange = (event) => {
-    setGenreFilter(event.target.value); // Aggiorna il filtro del genere
+    setGenreFilter(event.target.value);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      genre: event.target.value,
+    }));
   };
 
   return (

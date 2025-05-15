@@ -96,6 +96,9 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: white;
 }
 
 .searchBarItem > p {

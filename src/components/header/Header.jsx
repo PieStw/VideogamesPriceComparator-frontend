@@ -9,9 +9,26 @@ export default function Header() {
   const [backgroundColor, setBackgroundColor] = useState("");
   const [game, setGame] = useState("");
 
-  const { setSearch, getGames } = useGamesContext();
+  const { setFilters, getGames } = useGamesContext();
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setFilters({
+        search: "",
+        platform: "",
+        genre: "",
+      });
+    }
+  }, [location.pathname]);
+
+  const platforms = [
+    { name: "PC", value: 4, icon: "fa-desktop" },
+    { name: "Playstation", value: 18, icon: "fa-brands fa-playstation" },
+    { name: "Xbox", value: 1, icon: "fa-brands fa-xbox" },
+    { name: "Nintendo", value: 7, icon: "fa-gamepad" },
+  ];
 
   const handleCloseSearchBar = (e) => {
     e.stopPropagation();
@@ -24,46 +41,26 @@ export default function Header() {
     }
   }
 
-  function handleSearchButton(e) {
-    e.preventDefault();
-
-    if (e.target.value === "PC") {
-      getGames(1, {
-        platform: 4,
-        genre: "",
-      });
-    }
-    if (e.target.value === "Playstation") {
-      getGames(1, {
-        platform: 18,
-        genre: "",
-      });
-    }
-    if (e.target.value === "Xbox") {
-      getGames(1, {
-        platform: 1,
-        genre: "",
-      });
-    }
-    if (e.target.value === "Nintendo") {
-      getGames(1, {
-        platform: 7,
-        genre: "",
-      });
-    }
-
+  function applyFilters({ search = "", platform = "", genre = "" }) {
+    setFilters({ search, platform, genre });
     goToSearchPage();
+    getGames(1, { search, platform, genre });
   }
 
-  const searchGame = (e) => {
+  function handleSearchButton(e) {
     e.preventDefault();
-    setSearch(game);
-    getGames(1, {
-      platform: "",
-      genre: "",
-    });
-    goToSearchPage();
-  };
+    const selectedPlatform = platforms.find(
+      (p) => p.name === e.currentTarget.value
+    );
+    if (selectedPlatform) {
+      applyFilters({ platform: selectedPlatform.value });
+    }
+  }
+
+  function searchGame(e) {
+    e.preventDefault();
+    applyFilters({ search: game });
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,38 +96,18 @@ export default function Header() {
                   : ""
               }`}
             >
-              {!isSearchBarOpen && (
-                <>
-                  <li
+              {!isSearchBarOpen &&
+                platforms.map((platform) => (
+                  <button
+                    key={platform.name}
                     className={styles.searchBarItem}
                     onClick={handleSearchButton}
+                    value={platform.name}
                   >
-                    <i className="fa-solid fa-desktop me-1"></i>
-                    <p>PC</p>
-                  </li>
-                  <li
-                    className={styles.searchBarItem}
-                    onClick={handleSearchButton}
-                  >
-                    <i className="fa-brands fa-playstation me-1"></i>
-                    <p>Playstation</p>
-                  </li>
-                  <li
-                    className={styles.searchBarItem}
-                    onClick={handleSearchButton}
-                  >
-                    <i className="fa-brands fa-xbox me-1"></i>
-                    <p>Xbox</p>
-                  </li>
-                  <li
-                    className={styles.searchBarItem}
-                    onClick={handleSearchButton}
-                  >
-                    <i className="fa-brands fa-yahoo me-1"></i>
-                    <p>Nintendo</p>
-                  </li>
-                </>
-              )}
+                    <i className={`fa-solid ${platform.icon} me-1`}></i>
+                    <p>{platform.name}</p>
+                  </button>
+                ))}
 
               <li
                 onClick={() => setIsSearchBarOpen(true)}
@@ -182,22 +159,12 @@ export default function Header() {
 
         {/* Hidden Menu (for mobile or responsiveness) */}
         <div className={styles.hiddenMenu}>
-          <li className={styles.searchBarItemHidden}>
-            <i className="fa-solid fa-desktop me-1"></i>
-            <p>PC</p>
-          </li>
-          <li className={styles.searchBarItemHidden}>
-            <i className="fa-brands fa-playstation me-1"></i>
-            <p>Playstation</p>
-          </li>
-          <li className={styles.searchBarItemHidden}>
-            <i className="fa-brands fa-xbox me-1"></i>
-            <p>Xbox</p>
-          </li>
-          <li className={styles.searchBarItemHidden}>
-            <i className="fa-brands fa-yahoo me-1"></i>
-            <p>Nintendo</p>
-          </li>
+          {platforms.map((platform) => (
+            <li key={platform.name} className={styles.searchBarItemHidden}>
+              <i className={`fa-solid ${platform.icon} me-1`}></i>
+              <p>{platform.name}</p>
+            </li>
+          ))}
         </div>
       </header>
     </>

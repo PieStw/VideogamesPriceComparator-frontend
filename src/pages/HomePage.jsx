@@ -3,32 +3,55 @@ import styles from "../assets/css/homePage.module.css";
 import { useGamesContext } from "../context/GamesContext";
 import Card from "../components/cards/GameCard";
 import GenreCard from "../components/cards/GenreCard";
+import { useNavigate } from "react-router-dom";
+
 import bg from "../assets/img/bg.jpg";
 import bgIcon from "../assets/img/bg-icon.jpg";
 import Jumbo from "../components/jumbo/jumbo";
 
 export default function HomePage() {
-  const { tranding, genres } = useGamesContext();
+  const { tranding, genres, setFilters, getGames } = useGamesContext();
 
   if (tranding.length === 0) {
     return <div>Caricamento in corso...</div>;
   }
 
+  const navigate = useNavigate();
+
+  function goToSearchPage() {
+    if (location.pathname !== "/search") {
+      navigate("/search");
+    }
+  }
+
   const desiredGenres = [
-    "Action",
-    "Adventure",
-    "Arcade",
-    "Shooter",
-    "Fighting",
-    "RPG",
-    "Indie",
-    "Strategy",
-    "Sports",
+    { id: 4, name: "Action" },
+    { id: 3, name: "Adventure" },
+    { id: 11, name: "Arcade" },
+    { id: 2, name: "Shooter" },
+    { id: 6, name: "Fighting" },
+    { id: 5, name: "RPG" },
+    { id: 51, name: "Indie" },
+    { id: 10, name: "Strategy" },
+    { id: 15, name: "Sports" },
   ];
 
   const filteredGenres = genres.filter((genre) =>
-    desiredGenres.includes(genre.name)
+    desiredGenres.map((g) => g.name).includes(genre.name)
   );
+
+  const handleGenreClick = (genre) => {
+    const matched = desiredGenres.find((g) => g.name === genre.name);
+    if (!matched) return;
+
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      genre: matched.id,
+    }));
+
+    goToSearchPage();
+    getGames(1, { genre: matched.id });
+  };
 
   return (
     <>
@@ -57,7 +80,11 @@ export default function HomePage() {
           <div className={styles.cardContainer}>
             <div className="row">
               {filteredGenres.map((genre) => (
-                <div key={genre.id} className="col-12 col-md-6 col-xl-4 mb-4">
+                <div
+                  key={genre.id}
+                  className="col-12 col-md-6 col-xl-4 mb-4"
+                  onClick={() => handleGenreClick(genre)}
+                >
                   <GenreCard genre={genre} />
                 </div>
               ))}

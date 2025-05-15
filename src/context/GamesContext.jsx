@@ -11,8 +11,13 @@ export const GamesProvider = ({ children }) => {
   const [game, setGame] = useState([]);
   const [price, setPrice] = useState([]);
   const [stores, setStores] = useState([]);
-  const [search, setSearch] = useState("");
   const [games, setGames] = useState([]);
+
+  const [filters, setFilters] = useState({
+    search: "",
+    platform: "",
+    genre: "",
+  });
 
   const [pagination, setPagination] = useState({
     total: 0,
@@ -83,9 +88,11 @@ export const GamesProvider = ({ children }) => {
 
   function getGames(page, filters) {
     fetch(
-      `http://127.0.0.1:8000/api/videogames?name=${search}&page=${page}&platform=${
-        filters?.platform || ""
-      }&genre=${filters?.genre || ""}`
+      `http://127.0.0.1:8000/api/videogames?name=${
+        filters.search
+      }&page=${page}&platform=${filters?.platform || ""}&genre=${
+        filters?.genre || ""
+      }`
     )
       .then((response) => response.json())
       .then((data) => {
@@ -111,12 +118,12 @@ export const GamesProvider = ({ children }) => {
         getGame,
         price,
         stores,
-        search,
-        setSearch,
         getGames,
         games,
         platforms,
         pagination,
+        setFilters,
+        filters,
       }}
     >
       {children}
