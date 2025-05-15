@@ -1,42 +1,68 @@
 import styles from "../../assets/css/footer.module.css";
-
+import React, { useState, useEffect } from "react";
 export default function Footer() {
+  const [newsLetter, setNewsLetter] = useState(false);
+
+  function handleSubmit(e) {
+    setNewsLetter(true);
+    e.preventDefault();
+  }
+
   return (
     <footer>
-      <div className={styles.mailList}>
-        <div className={styles.container}>
-          <h2>Join our newsletter and don't miss any promotions!</h2>
-          <h6>
-            And be the first to receive our private offers, newsletters, and
-            deals of the week
-          </h6>
-          <form className="row mt-3">
-            <input
-              className={`${styles.inputName} col-12 mt-3`}
-              type="text"
-              placeholder="Enter your name"
-              required
-            />
-
-            <input
-              className={`${styles.inputLastName} col-12 mt-3 `}
-              type="text"
-              placeholder="Enter your last name"
-              required
-            />
-
-            <input
-              className={`${styles.inputEmail} col-12 mt-3`}
-              type="email"
-              placeholder="Enter your email"
-              required
-            />
-            <button className={`${styles.button} mt-3`} type="submit">
-              Subscribe
+      {newsLetter ? (
+        <div className={styles.mailList}>
+          <div className={styles.container}>
+            <h2>Thank you for subscribing!</h2>
+            <h6>
+              You will receive our newsletters, private offers, and deals of the
+              week.
+            </h6>
+            <button
+              className={`${styles.button} mt-3`}
+              onClick={() => setNewsLetter(false)}
+            >
+              Close
             </button>
-          </form>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className={styles.mailList}>
+          <div className={styles.container}>
+            <h2>Join our newsletter and don't miss any promotions!</h2>
+            <h6>
+              And be the first to receive our private offers, newsletters, and
+              deals of the week
+            </h6>
+            <form className="row mt-3" onSubmit={handleSubmit}>
+              <input
+                className={`${styles.inputName} col-12 mt-3`}
+                type="text"
+                placeholder="Enter your name"
+                required
+              />
+
+              <input
+                className={`${styles.inputLastName} col-12 mt-3 `}
+                type="text"
+                placeholder="Enter your last name"
+                required
+              />
+
+              <input
+                className={`${styles.inputEmail} col-12 mt-3`}
+                type="email"
+                placeholder="Enter your email"
+                required
+              />
+              <button className={`${styles.button} mt-3`} type="submit">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+
       <div className={styles.endPage}>
         <ul className={styles.socialMedia}>
           <li>About Us</li>

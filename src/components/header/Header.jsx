@@ -9,7 +9,7 @@ export default function Header() {
   const [backgroundColor, setBackgroundColor] = useState("");
   const [game, setGame] = useState("");
 
-  const { setSearch } = useGamesContext();
+  const { setSearch, getGames } = useGamesContext();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -18,12 +18,51 @@ export default function Header() {
     setIsSearchBarOpen(false);
   };
 
-  const searchGame = (e) => {
-    e.preventDefault();
-    setSearch(game);
+  function goToSearchPage() {
     if (location.pathname !== "/search") {
       navigate("/search");
     }
+  }
+
+  function handleSearchButton(e) {
+    e.preventDefault();
+
+    if (e.target.value === "PC") {
+      getGames(1, {
+        platform: 4,
+        genre: "",
+      });
+    }
+    if (e.target.value === "Playstation") {
+      getGames(1, {
+        platform: 18,
+        genre: "",
+      });
+    }
+    if (e.target.value === "Xbox") {
+      getGames(1, {
+        platform: 1,
+        genre: "",
+      });
+    }
+    if (e.target.value === "Nintendo") {
+      getGames(1, {
+        platform: 7,
+        genre: "",
+      });
+    }
+
+    goToSearchPage();
+  }
+
+  const searchGame = (e) => {
+    e.preventDefault();
+    setSearch(game);
+    getGames(1, {
+      platform: "",
+      genre: "",
+    });
+    goToSearchPage();
   };
 
   useEffect(() => {
@@ -62,19 +101,31 @@ export default function Header() {
             >
               {!isSearchBarOpen && (
                 <>
-                  <li className={styles.searchBarItem}>
+                  <li
+                    className={styles.searchBarItem}
+                    onClick={handleSearchButton}
+                  >
                     <i className="fa-solid fa-desktop me-1"></i>
                     <p>PC</p>
                   </li>
-                  <li className={styles.searchBarItem}>
+                  <li
+                    className={styles.searchBarItem}
+                    onClick={handleSearchButton}
+                  >
                     <i className="fa-brands fa-playstation me-1"></i>
                     <p>Playstation</p>
                   </li>
-                  <li className={styles.searchBarItem}>
+                  <li
+                    className={styles.searchBarItem}
+                    onClick={handleSearchButton}
+                  >
                     <i className="fa-brands fa-xbox me-1"></i>
                     <p>Xbox</p>
                   </li>
-                  <li className={styles.searchBarItem}>
+                  <li
+                    className={styles.searchBarItem}
+                    onClick={handleSearchButton}
+                  >
                     <i className="fa-brands fa-yahoo me-1"></i>
                     <p>Nintendo</p>
                   </li>

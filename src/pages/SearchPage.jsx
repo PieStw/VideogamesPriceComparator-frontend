@@ -15,13 +15,12 @@ export default function SearchPage() {
     getGames(currentPage, {
       platform: platformFilter,
       genre: genreFilter,
-      search,
     });
   }, [currentPage, platformFilter, genreFilter, search]);
 
   useEffect(() => {
     setCurrentPage(1);
-    getGames(1, { platform: platformFilter, genre: genreFilter, search });
+    getGames(1, { platform: platformFilter, genre: genreFilter });
   }, [search]);
 
   const handleNextPage = () => {
