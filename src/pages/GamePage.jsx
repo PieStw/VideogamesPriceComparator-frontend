@@ -22,7 +22,7 @@ export default function GamePage() {
   }, [id]);
 
   if (!game || Object.keys(game).length === 0) {
-    return <div className={styles.loading}>Caricamento in corso...</div>;
+    return <div className={styles.placeholder}></div>;
   }
 
   const getStoreById = (id) => stores.find((s) => s.storeID === id);

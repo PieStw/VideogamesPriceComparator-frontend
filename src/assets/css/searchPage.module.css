@@ -92,3 +92,8 @@
 .filters select:first-child {
   margin-right: 20px; /* Aggiungi spazio tra i filtri */
 }
+
+.placeholder {
+  height: 32vh;
+  background-color: #272727;
+}

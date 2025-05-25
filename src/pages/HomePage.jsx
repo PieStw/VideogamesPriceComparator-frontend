@@ -1,10 +1,8 @@
-import React from "react";
 import styles from "../assets/css/homePage.module.css";
 import { useGamesContext } from "../context/GamesContext";
 import Card from "../components/cards/GameCard";
 import GenreCard from "../components/cards/GenreCard";
 import { useNavigate } from "react-router-dom";
-
 import bg from "../assets/img/bg.jpg";
 import bgIcon from "../assets/img/bg-icon.jpg";
 import Jumbo from "../components/jumbo/jumbo";
@@ -13,7 +11,7 @@ export default function HomePage() {
   const { tranding, genres, setFilters, getGames } = useGamesContext();
 
   if (tranding.length === 0) {
-    return <div>Caricamento in corso...</div>;
+    return <div className={styles.placeholder}></div>;
   }
 
   const navigate = useNavigate();

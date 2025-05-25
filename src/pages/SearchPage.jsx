@@ -88,7 +88,7 @@ export default function SearchPage() {
 
         {games.length === 0 ? (
           <div className={styles.noResults}>
-            <h3>Nessun risultato trovato</h3>
+            <div className={styles.placeholder}></div>;
           </div>
         ) : (
           <div>

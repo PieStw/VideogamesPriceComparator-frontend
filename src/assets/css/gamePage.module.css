@@ -124,3 +124,8 @@
 .platform {
   background-color: rgba(0, 123, 255, 0.4); /* blu */
 }
+
+.placeholder {
+  height: 32vh;
+  background-color: #272727;
+}

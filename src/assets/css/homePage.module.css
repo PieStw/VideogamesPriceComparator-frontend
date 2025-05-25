@@ -30,3 +30,8 @@
 .bgIcon {
   height: 200px;
 }
+
+.placeholder {
+  height: 32vh;
+  background-color: #272727;
+}
